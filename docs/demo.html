@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PayBridge — Policy-Gated Payment Vault on Sui</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0f172a;color:#e2e8f0;line-height:1.7;max-width:900px;margin:0 auto;padding:40px 20px}
+h1{font-size:2.2rem;color:#f8fafc;margin-bottom:8px}
+h2{font-size:1.4rem;color:#94a3b8;margin:40px 0 16px;border-bottom:1px solid #1e293b;padding-bottom:8px}
+.tagline{color:#38bdf8;font-size:1.15rem;margin-bottom:32px}
+.card{background:#1e293b;border-radius:12px;padding:24px;margin:16px 0}
+.card h3{color:#f1f5f9;margin-bottom:12px}
+pre{background:#0f172a;border:1px solid #334155;border-radius:8px;padding:16px;overflow-x:auto;font-size:0.9rem;margin:12px 0}
+.arch{font-family:monospace;background:#1e293b;padding:24px;border-radius:12px;text-align:center;font-size:0.95rem;line-height:2}
+.arch .box{display:inline-block;background:#334155;padding:6px 16px;border-radius:6px;margin:4px}
+.arch .arrow{color:#38bdf8;margin:0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:16px 0}
+.grid .item{background:#1e293b;border-radius:12px;padding:20px;text-align:center}
+.grid .item strong{display:block;color:#38bdf8;font-size:1.6rem;margin-bottom:4px}
+.badge{display:inline-block;background:#38bdf8;color:#0f172a;padding:4px 12px;border-radius:20px;font-size:0.85rem;font-weight:600;margin:4px}
+a{color:#38bdf8;text-decoration:none}
+a:hover{text-decoration:underline}
+.stats{text-align:center;padding:32px 0}
+.stats .num{font-size:2.5rem;font-weight:700;color:#38bdf8}
+.footer{margin-top:60px;padding-top:24px;border-top:1px solid #1e293b;color:#64748b;font-size:0.9rem}
+</style>
+</head>
+<body>
+
+<h1>🔐 PayBridge</h1>
+<p class="tagline">Policy-Gated Payment Vault on Sui — 4 on-chain guards for every SUI transfer</p>
+
+<div class="stats">
+  <div class="num">4/4</div>
+  <p>Move unit tests passing</p>
+</div>
+
+<h2>🏆 Hackathon</h2>
+<div class="card">
+  <span class="badge">Sui Overflow 2026</span> <span class="badge">$500K Prize Pool</span>
+  <p style="margin-top:12px">DeFi Security Track — Policy enforcement for on-chain payments</p>
+</div>
+
+<h2>🏗️ Architecture</h2>
+<div class="arch">
+  <span class="box">Transfer Request</span>
+  <span class="arrow">→</span>
+  <span class="box" style="border:2px solid #38bdf8">Policy Engine</span>
+  <span class="arrow">→</span><br><br>
+  <span class="box">Spend Limit</span>
+  <span class="box">Whitelist</span>
+  <span class="box">Rate Limit</span>
+  <span class="box">Time Window</span><br><br>
+  <span class="arrow">↓ (all pass)</span><br>
+  <span class="box" style="border:2px solid #22c55e">Execute Transfer</span>
+  &nbsp;or&nbsp;
+  <span class="box" style="border:2px solid #ef4444">Reject</span>
+</div>
+
+<h2>🛡️ The 4 Policies</h2>
+<div class="grid">
+  <div class="item">
+    <strong>$</strong>
+    <span>Spend Limit</span>
+    <p style="font-size:0.85rem;color:#94a3b8;margin-top:8px">Caps per-transaction SUI amount</p>
+  </div>
+  <div class="item">
+    <strong>✓</strong>
+    <span>Whitelist</span>
+    <p style="font-size:0.85rem;color:#94a3b8;margin-top:8px">Only approved recipient addresses</p>
+  </div>
+  <div class="item">
+    <strong>⏱</strong>
+    <span>Rate Limit</span>
+    <p style="font-size:0.85rem;color:#94a3b8;margin-top:8px">Prevents rapid successive transfers</p>
+  </div>
+  <div class="item">
+    <strong>📅</strong>
+    <span>Time Window</span>
+    <p style="font-size:0.85rem;color:#94a3b8;margin-top:8px">Confines to designated periods</p>
+  </div>
+</div>
+
+<h2>🧪 Test Results</h2>
+<pre>
+$ sui move test
+BUILDING PayBridge
+Running Move unit tests
+[ PASS    ] 0x0::paybridge_tests::test_spend_limit
+[ PASS    ] 0x0::paybridge_tests::test_whitelist
+[ PASS    ] 0x0::paybridge_tests::test_rate_limit
+[ PASS    ] 0x0::paybridge_tests::test_time_window
+
+Test result: OK. Total tests: 4; passed: 4; failed: 0
+</pre>
+
+<h2>⚡ Tech Stack</h2>
+<div class="grid">
+  <div class="item"><strong>Move</strong><span>2024 Edition</span></div>
+  <div class="item"><strong>Sui</strong><span>Blockchain</span></div>
+  <div class="item"><strong>0</strong><span>Dependencies</span></div>
+</div>
+
+<h2>📂 Repository</h2>
+<div class="card">
+  <h3>GitHub</h3>
+  <p><a href="https://github.com/aggreyeric/sui-paybridge">github.com/aggreyeric/sui-paybridge</a></p>
+  <p style="color:#94a3b8;margin-top:8px">Pure Move 2024 — no external dependencies. Clone, build, test.</p>
+</div>
+
+<div class="footer">
+  Built for Sui Overflow 2026 · <a href="https://github.com/aggreyeric/sui-paybridge">Source Code</a>
+</div>
+</body>
+</html>
