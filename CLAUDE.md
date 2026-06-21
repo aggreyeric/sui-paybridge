@@ -1,35 +1,32 @@
 # CLAUDE.md — PayBridge on Sui
 
 ## Project Overview
-Policy-gated payment vault on Sui. 4 on-chain Move policies enforced before any SUI transfer.
+Policy-gated payment vault on Sui. 4 on-chain Move policies (spend limit, whitelist, rate limit, time window) enforced before any SUI transfer.
 
 ## Tech Stack
 - **Language:** Move 2024 (Sui)
-- **Platform:** Sui Network
-- **Tests:** 4 Move unit tests (`sui move test`)
+- **Tests:** `sui move test` (4 unit tests)
+- **Hackathon:** Sui Overflow 2026 ($500K pool)
 
 ## Commands
 ```bash
-# Run tests
-sui move test
-
-# Build
-sui move build
-
-# Publish (testnet)
-sui client publish --gas-budget 100000000
+sui move build        # Compile
+sui move test         # Run 4 unit tests
+sui move test --filter paybridge  # Run specific tests
 ```
 
 ## Architecture
-- `sources/` — Move modules (policy enforcement logic)
-- `tests/` — Move test files
+- `sources/paybridge.move` — Main module with policy enforcement logic
+- `tests/paybridge_tests.move` — Unit tests for all 4 policies
 - `Move.toml` — Package manifest (edition 2024)
 
 ## Key Features
-- Spend limit policy
-- Whitelist policy
-- Rate limit policy
-- Time window policy
+1. **Spend Limit** — Caps transfer amount per transaction
+2. **Whitelist** — Only allow transfers to approved addresses
+3. **Rate Limit** — Limits transfer frequency
+4. **Time Window** — Restrict transfers to specific time periods
 
-## Hackathon Target
-- Sui Overflow 2026 — $500K prize pool
+## Notes
+- No external dependencies (pure Move)
+- Tests verify each policy independently
+- Built for Sui Overflow 2026 hackathon
