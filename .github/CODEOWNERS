@@ -1,0 +1,10 @@
+# Default
+* @aggreyeric
+
+# Move contracts
+/sources/ @aggreyeric
+/tests/ @aggreyeric
+
+# Docs
+/README.md @aggreyeric
+/CLAUDE.md @aggreyeric
